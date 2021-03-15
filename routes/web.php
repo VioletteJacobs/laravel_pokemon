@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // $pokemon = Pokemon::all();
     // dd($pokemon[0]->types->name);
-    $type = Type::all();
-    dd($type[0]->pokemons->name);
-    return view('welcome');
+    $DBType = Type::all();
+    $DBPokemon = Pokemon::all();
+    return view('welcome', compact("DBType", "DBPokemon"));
 });
 Route::resource("pokemons", PokemonController::class);
 Route::resource("types", TypeController::class);

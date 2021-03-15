@@ -11,10 +11,10 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="/pokemon/create">Create Pokemon </a>
+          <a class="nav-link" href="/pokemons/create">Create Pokemon </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/type/create">Create Type</a>
+            <a class="nav-link" href="/types/create">Create Type</a>
           </li>
     </div>
   </nav>

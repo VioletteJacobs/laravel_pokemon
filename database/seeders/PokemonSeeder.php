@@ -17,8 +17,18 @@ class PokemonSeeder extends Seeder
         DB::table("pokemon")->insert([
             [
                 "name" => "pika",
-                "img" => "erf",
+                "img" => "/img/poke1.jpeg",
                 "level" => 50
+            ],
+            [
+                "name" => "Cara",
+                "img" => "/img/poke2.jpeg",
+                "level" => 20
+            ],
+            [
+                "name" => "Toupiche",
+                "img" => "/img/poke3.jpeg",
+                "level" => 15
             ],
         ]);
     }

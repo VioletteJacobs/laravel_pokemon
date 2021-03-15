@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PokemonController extends Controller
 {
@@ -24,7 +25,8 @@ class PokemonController extends Controller
      */
     public function create()
     {
-        //
+        $DBPokemon = Pokemon::all();
+        return view("pages.createPokemon", compact("DBPokemon"));
     }
 
     /**
@@ -35,7 +37,22 @@ class PokemonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            
+            "name" => "required|max:250",
+            "level" => "required|max:250",
+            "img" => "required|max:950",
+
+        ]);
+
+        $newEntry = new Pokemon;
+
+        $newEntry->name = $request->name;
+        $newEntry->level = $request->level;
+        Storage::put("public/img",$request->img);
+        $newEntry->img = $request->file("img")->hashname();
+        $newEntry->save();
+        return redirect("/");
     }
 
     /**
@@ -78,8 +95,11 @@ class PokemonController extends Controller
      * @param  \App\Models\Pokemon  $pokemon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pokemon $pokemon)
+    public function destroy($id)
     {
-        //
+        $destroy = Pokemon::find($id);
+        // Storage::delete("public/img/".$destroyPhoto->url);
+        $destroy->delete();
+        return redirect("/");
     }
 }

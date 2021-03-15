@@ -24,7 +24,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $DBType = Type::all();
+        return view("pages.createType", compact("DBType"));
     }
 
     /**
