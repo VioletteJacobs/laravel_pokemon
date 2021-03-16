@@ -8,7 +8,11 @@
           <h5 class="card-title">Nom : {{$show->name}}</h5>
           <p class="card-text">Level : {{$show->level}}</p>
           {{-- <p class="card-text">Type : {{$show->types->name}}</p> --}}
-          <a href="pokemons/{{$show->id}}/edit" class="btn btn-warning">Modify</a>
+          <form action="/pokemons/{{$show->id}}/edit" method="POST">
+                @csrf
+                @method("GET")
+                <button class="btn btn-warning" type="submit">Voir plus</button>
+        </form>
         </div>
       </div>
 </section>

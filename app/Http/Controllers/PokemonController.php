@@ -73,9 +73,10 @@ class PokemonController extends Controller
      * @param  \App\Models\Pokemon  $pokemon
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pokemon $pokemon)
+    public function edit($id)
     {
-        //
+        $edit = Pokemon::find($id);
+        return view ("pages.edit.editPokemon", compact("edit"));
     }
 
     /**
@@ -85,9 +86,19 @@ class PokemonController extends Controller
      * @param  \App\Models\Pokemon  $pokemon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pokemon $pokemon)
-    {
-        //
+    public function update(Request $request, $id)
+    { 
+        $update = Pokemon::find($id);
+        $update->name = $request->name;
+        $update->level = $request->level;
+
+        Storage::delete('public/img'.$update->img);
+        $update->img = $request->fil("url")->hashName();
+        Storage::put("public/img", $request->file("url"));
+
+        $update->save();
+
+        return redirect("/");
     }
 
     /**
