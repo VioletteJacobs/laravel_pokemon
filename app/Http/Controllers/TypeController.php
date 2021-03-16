@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pokemon;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class TypeController extends Controller
     public function create()
     {
         $DBType = Type::all();
-        return view("pages.createType", compact("DBType"));
+        $DBPokemon = Pokemon::all();
+        return view("pages.createType", compact("DBType", "DBPokemon"));
     }
 
     /**
@@ -36,7 +38,15 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            "name" => "required|min:2|max:50",
+            "pokemon_id" => "max:10"
+        ]);
+        $newEntry = new Type;
+        $newEntry->name = $request->name;
+        $newEntry->pokemon_id = $request->pokemon_id;
+        $newEntry->save();
+        return redirect("/");
     }
 
     /**

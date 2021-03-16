@@ -19,8 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // $pokemon = Pokemon::all();
-    // dd($pokemon[0]->types->name);
+    
     $DBType = Type::all();
     $DBPokemon = Pokemon::all();
     return view('welcome', compact("DBType", "DBPokemon"));

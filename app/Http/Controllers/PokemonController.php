@@ -50,7 +50,7 @@ class PokemonController extends Controller
         $newEntry->name = $request->name;
         $newEntry->level = $request->level;
         Storage::put("public/img",$request->img);
-        $newEntry->img = $request->file("img")->hashname();
+        $newEntry->img = $request->file("img")->hashName();
         $newEntry->save();
         return redirect("/");
     }
@@ -61,9 +61,9 @@ class PokemonController extends Controller
      * @param  \App\Models\Pokemon  $pokemon
      * @return \Illuminate\Http\Response
      */
-    public function show(Pokemon $pokemon)
+    public function show($id)
     {
-        //
+        $show = Pokemon::find($id);
     }
 
     /**
@@ -98,7 +98,7 @@ class PokemonController extends Controller
     public function destroy($id)
     {
         $destroy = Pokemon::find($id);
-        // Storage::delete("public/img/".$destroyPhoto->url);
+        Storage::delete("public/img/".$destroy->img);
         $destroy->delete();
         return redirect("/");
     }

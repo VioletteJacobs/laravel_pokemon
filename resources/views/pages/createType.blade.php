@@ -9,7 +9,7 @@
 			</ul> </div> 
         @endif
         
-        <form action="pokemons" method="POST">
+        <form action="/types" method="POST">
             @csrf
             <div class="form-group">
               <label for="exampleInputEmail1">Name : </label>
@@ -18,9 +18,9 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Pokemon: </label>
                 <select name="pokemon_id" id="">
-                    @foreach ($DBType as $item)
-                    <option value="">{{$item->}}</option>
-                        
+                    <option value="">No pokemon</option>
+                    @foreach ($DBPokemon as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
 
                 </select>
