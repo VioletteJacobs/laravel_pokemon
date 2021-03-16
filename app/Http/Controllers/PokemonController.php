@@ -64,6 +64,7 @@ class PokemonController extends Controller
     public function show($id)
     {
         $show = Pokemon::find($id);
+        return view("pages.show.showPokemon", compact("show"));
     }
 
     /**
