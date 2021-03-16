@@ -88,16 +88,22 @@ class PokemonController extends Controller
      */
     public function update(Request $request, $id)
     { 
+        $validation = $request->validate([
+            
+            "name" => "required|max:250",
+            "level" => "required|max:250",
+            "img" => "required",
+
+        ]);
         $update = Pokemon::find($id);
         $update->name = $request->name;
         $update->level = $request->level;
+        Storage::delete('public/img/'.$update->img);
+        Storage::put("public/img", $request->img);
+        $update->img = $request->file("img")->hashName();
 
-        Storage::delete('public/img'.$update->img);
-        $update->img = $request->fil("url")->hashName();
-        Storage::put("public/img", $request->file("url"));
 
         $update->save();
-
         return redirect("/");
     }
 

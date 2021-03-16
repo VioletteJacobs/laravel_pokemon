@@ -2,8 +2,8 @@
 @section('content')
 <section class="container">
     <h1 class="text-center">Vous souhaitez modifier votre élément <span class="text-success">{{$edit->name}}</span></h1>
-    <form action="/pokemons" method="POST" enctype="multipart/form-data">
-        @csrf
+    <form action="/pokemons/{{$edit->id}}" method="POST" enctype="multipart/form-data">
+        @csrf 
         @method("PATCH")
         <div class="form-group">
           <label for="exampleInputEmail1">Name : </label>
